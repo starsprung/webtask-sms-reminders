@@ -1,0 +1,17 @@
+{
+  "name": "set-reminder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webtask.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body": "^5.1.0",
+    "iso8601-duration": "^1.1.1",
+    "mongodb": "^3.0.0",
+    "twilio": "^3.11.0"
+  }
+}
