@@ -19,7 +19,7 @@ async function handleRequest(context, req, res) {
     const deliveryDate = new Date(Date.now() + parsedMessage.durationMillis);
     
     try {
-      await saveReminder(dbUrl, deliveryDate, parsedMessage.messageText);
+      await saveReminder(dbUrl, phoneNumber, deliveryDate, parsedMessage.messageText);
 
       sendResponse(res, `Reminder will be delivered at ${deliveryDate.toISOString()}.`);
     } catch (e) {
@@ -50,7 +50,7 @@ function parseMessage(message) {
   };
 }
 
-async function saveReminder(dbUrl, deliveryDate, message) {
+async function saveReminder(dbUrl, phoneNumber, deliveryDate, message) {
   const client = await MongoClient.connect(dbUrl);
   //TODO: extract hardcoded values
   const db = client.db('reminders');
@@ -58,11 +58,10 @@ async function saveReminder(dbUrl, deliveryDate, message) {
 
   await collection.insertOne({
     deliveryDate,
+    phoneNumber,
     message,
     sent: false
   });
-
-  client.close();
 }
 
 function createTwiml(message) {
