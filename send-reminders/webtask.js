@@ -50,7 +50,9 @@ async function markReminderSent(collection, reminder) {
     _id: reminder._id
   },
   {
-    sent: true
+    $set: {
+      sent: true
+    }
   });
 }
 
