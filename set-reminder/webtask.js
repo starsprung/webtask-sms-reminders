@@ -11,7 +11,7 @@ module.exports = handleRequest;
 async function handleRequest(context, req, res) {
   const dbUrl = context.secrets.DB_URL;
 
-  const body = await(formBodyAsync(req));
+  const body = await formBodyAsync(req);
   const {From: phoneNumber, Body: smsBody} = body;
   const parsedMessage = parseMessage(smsBody);
 
